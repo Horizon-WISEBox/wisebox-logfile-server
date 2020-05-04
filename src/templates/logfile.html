@@ -1,0 +1,23 @@
+$def with (startdate, status, entries)
+<h1>WISEParks Log File</h1>
+<p><a href="/">Back to home page</a></p>
+<ul>
+  <li>Device ID: $DEVICE_ID</li>
+  <li>File start date &amp; time: $startdate.strftime('%x %X')</li>
+  <li>File status: $status.capitalize()</li>
+</ul>
+<p>Note: All times are displayed as UTC</p>
+<table>
+  <tr>
+    <th>Bucket Start</th>
+    <th>Bucket Count</th>
+    <th>RSSIs</th>
+  </tr>
+  $for start, count, rssis in entries:
+    <tr class="$loop.parity">
+      <td>$start.strftime('%x %X')</td>
+      <td>$count</td>
+      <td>$rssis</td>
+    </tr>
+
+</table>

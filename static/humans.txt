@@ -1,0 +1,21 @@
+/* TEAM */
+
+Name: Horizon Digital Economy Research
+
+Site: https://www.horizon.ac.uk
+
+Twitter: @HorizonDER
+
+Location: Nottingham, UK.
+
+/* SITE */
+
+Last update: 2020/05/05
+
+Standards: HTML5, CSS3
+
+Images:
+
+  - Owl icon (https://www.flaticon.com/free-icon/owl_1864653) made by Freepik
+    (https://www.flaticon.com/authors/freepik) from https://www.flaticon.com/
+
