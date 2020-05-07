@@ -1,6 +1,8 @@
 #!/usr/bin/env python3.7
 
+import io
 import struct
+import zipfile
 
 from datetime import datetime
 from pathlib import Path
@@ -14,8 +16,9 @@ import web
 from jsonargparse import ArgumentParser
 
 urls = (
-    '/', 'index',
-    '/(wp.*)', 'logfile',
+    '/', 'Index',
+    '/download', 'Download',
+    '/(wp.*)', 'Logfile',
 )
 
 app_globals = {}
@@ -23,7 +26,7 @@ app_globals = {}
 render = web.template.render('templates/', base='base', globals=app_globals)
 
 
-class index:
+class Index:
     def GET(self):
         d = Path('/var/log/wiseparks-logger')
         log_files = list()
@@ -34,7 +37,21 @@ class index:
         return render.index(log_files=log_files)
 
 
-class logfile:
+class Download:
+    def GET(self):
+        web.header(
+            'Content-Disposition', 'attachment; filename="wiseparks.zip"')
+        web.header('Content-type', 'application/zip')
+        web.header('Content-transfer-encoding', 'binary')
+        zip_buf = io.BytesIO()
+        with zipfile.ZipFile(zip_buf, mode='w') as zip_file:
+            d = Path('/var/log/wiseparks-logger')
+            for f in d.glob('wp*'):
+                zip_file.write(f, arcname=f.name)
+        return zip_buf.getvalue()
+
+
+class Logfile:
 
     def decode_head(self, i, buf):
         ENCODING = 'utf_8'
