@@ -3,16 +3,12 @@
 import io
 import struct
 import zipfile
-
 from datetime import datetime
 from pathlib import Path
 
 import netifaces
-
 import pytz
-
 import web
-
 from jsonargparse import ArgumentParser
 
 urls = (
