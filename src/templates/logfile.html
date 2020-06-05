@@ -8,8 +8,8 @@ $def with (startdate, status, entries, header)
 </ul>
 <h2>File Header</h2>
 <ul>
+    <li>Logfile format version: $header['logfile_version']</li>
     <li>MAC: $header['mac']</li>
-    <li>Channel: $header['channel']</li>
     <li>Interval: $header['interval'] minutes</li>
     <li>Timezone: $header['timezone']</li>
     <li>Metadata: $header['metadata']</li>
@@ -18,12 +18,14 @@ $def with (startdate, status, entries, header)
 <table>
   <tr>
     <th>Bucket Start</th>
+    <th>Frequency</td>
     <th>Bucket Count</th>
     <th>RSSIs</th>
   </tr>
-  $for start, count, rssis in entries:
+  $for start, frequency, count, rssis in entries:
     <tr class="$loop.parity">
       <td>$start.strftime('%x %X')</td>
+      <td>$frequency</td>
       <td>$count</td>
       <td>$rssis</td>
     </tr>

@@ -11,6 +11,8 @@ import pytz
 import web
 from jsonargparse import ArgumentParser
 
+VERSION = '1.0.0'
+
 urls = (
     '/', 'Index',
     '/download', 'Download',
@@ -52,11 +54,11 @@ class Logfile:
     def decode_head(self, i, buf):
         ENCODING = 'utf_8'
         header = dict()
+        header['logfile_version'] = struct.unpack_from('<H', buf, i)[0]
+        i += 2
         mac_bytes = struct.unpack_from('<BBBBBB', buf, i)
-        i += 6
         header['mac'] = ':'.join([f'{x:02x}' for x in mac_bytes])
-        header['channel'] = struct.unpack_from('<B', buf, i)[0]
-        i += 1
+        i += 6
         header['interval'] = struct.unpack_from('<I', buf, i)[0]
         i += 4
         tz_len = struct.unpack_from('<B', buf, i)[0]
@@ -73,16 +75,16 @@ class Logfile:
     def decode_body(self, i, buf):
         entries = list()
         while i < len(buf):
-            (a, b) = struct.unpack_from('<iH', buf, i)
+            (a, b, c) = struct.unpack_from('<iHH', buf, i)
             st = datetime.fromtimestamp(a, tz=pytz.UTC)
-            i += 6
-            j = i + b
+            i += 8
+            j = i + c
             rssis = []
             while i < j:
                 (rssi, ) = struct.unpack_from('<b', buf, i)
                 i += 1
                 rssis.append(rssi)
-            entries.append((st, b, rssis))
+            entries.append((st, b, c, rssis))
         return i, entries
 
     def GET(self, filename):
@@ -112,5 +114,6 @@ if __name__ == "__main__":
         app_globals['DEVICE_ID'] = iface[netifaces.AF_LINK][0]['addr']
     except KeyError:
         app_globals['DEVICE_ID'] = 'Unknown'
+    app_globals['VERSION'] = VERSION
     app = web.application(urls, globals())
     app.run()
