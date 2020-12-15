@@ -16,7 +16,7 @@ import web
 from jsonargparse import ActionConfigFile, ArgumentParser
 
 VERSION = '1.0.1'
-DESCRIPTION = 'Simple server for display of WISEParks log files'
+DESCRIPTION = 'Simple server for display of WISEBox log files'
 
 urls = (
     '/', 'Index',
@@ -104,7 +104,7 @@ class Index:
 class Download:
     def GET(self):
         web.header(
-            'Content-Disposition', 'attachment; filename="wiseparks.zip"')
+            'Content-Disposition', 'attachment; filename="wisebox.zip"')
         web.header('Content-type', 'application/zip')
         web.header('Content-transfer-encoding', 'binary')
         zip_buf = io.BytesIO()
