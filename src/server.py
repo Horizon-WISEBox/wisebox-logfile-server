@@ -185,7 +185,7 @@ def main():
     parser.add_argument(
         'log.dir',
         type=str,
-        help='directory to write logs to')
+        help='directory log files are stored in')
     parser.add_argument('--config', action=ActionConfigFile)
     parser.add_argument(
         '--version',
