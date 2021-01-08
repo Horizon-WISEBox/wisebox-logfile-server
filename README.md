@@ -40,6 +40,9 @@ optional arguments:
 
 ## Version History
 
+* v1.1.1
+  * Updated Favicon
+  * See [commit change](https://github.com/Horizon-WISEBox/wisebox-logfile-server/commit/363768b)
 * v1.1.0
   * WISEParks renamed to WISEBox
   * See [commit change](https://github.com/Horizon-WISEBox/wisebox-logfile-server/commit/986c6c4)
