@@ -40,6 +40,9 @@ optional arguments:
 
 ## Version History
 
+* v1.1.2
+  * Corrected version information
+  * See [commit change](https://github.com/Horizon-WISEBox/wisebox-logfile-server/commit/b2d388c)
 * v1.1.1
   * Updated Favicon
   * See [commit change](https://github.com/Horizon-WISEBox/wisebox-logfile-server/commit/363768b)
