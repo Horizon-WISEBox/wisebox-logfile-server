@@ -15,7 +15,7 @@ import pytz
 import web
 from jsonargparse import ActionConfigFile, ArgumentParser
 
-VERSION = '1.0.1'
+VERSION = '1.1.2'
 DESCRIPTION = 'Simple server for display of WISEBox log files'
 
 urls = (
